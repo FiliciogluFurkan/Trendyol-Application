@@ -75,20 +75,3 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
     }
 
 }
-/*
-*      try {
-            String jwtToken = extractJwtFromRequest(request);
-            if (StringUtils.hasText(jwtToken) && jwtTokenProvider.validateToken(jwtToken)) {
-                Long id = jwtTokenProvider.getUserIdFromJwt(jwtToken);
-                UserDetails user = userDetailService.loadUserById(id);
-                UserModel userModel=userRepository.findById(id).orElse(null);
-                if (user != null) {
-                    Stream<String> concat = Stream.concat(userModel.getRoles().stream().map(roleModel -> "ROLE_" + roleModel.getName(),
-                            userModel.getRoles().stream().map(roleModel ->roleModel.getPrivileges() )
-                            ));
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, userModel.);
-                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(auth);
-                }
-            }
-        }*/
