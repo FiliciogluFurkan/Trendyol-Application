@@ -21,4 +21,5 @@ public class ProductRequestDto {
     private double productPrice; // tüm fiyat bilgilrti BigDecimal türünde olacak. BigDecimal nedir?
     private List<Long> subCategoryIds;
 
+
 }
