@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: trendyol
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trendyol-db
+    username: furka
+    password: 123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
+
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/trendyol
+    elasticsearch:
+      cluster-nodes:
+        - localhost:9200
+        - localhost:9300
+      cluster-name: my-elasticsearch-cluster
+
+  elasticsearch:
+    jest:
+      uris: http://localhost:9200
+
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      group-id: email-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      topic: email-topic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      topic: email-topic
+    template:
+      default-topic: trendyol-topic
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: trendyolinfo.tr@gmail.com
+    password: czbj ckkl kbme ipds
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+logging:
+  level:
+    org:
+      springframework:
+        kafka: DEBUG  # Kafka logları için debug seviyesi
+
+# Volumes kısmı Docker Compose'da olacak
+volumes:
+  db-data:
+
+# JWT için Secret Key ve Token Expiry Süresi
+jwt-key: hLHutRVDTS1KM3ANe1drkR/BFGepz9pEv8M1UGjQ7AiDy14vYH1dEQnOwb6EjYqvorcVDGAp6mJILGcd3lOJdleqby/toupOB5Wh9Q0CIEjuqhSkCHJEVil67UY8Milz4q+gtt/W9R2R28ilEenCnlEQazcWPUuKpYeRuQ6NnJA=
+
+refresh:
+  token:
+    expires.in: 604800  # 7 gün (saniye cinsinden)
